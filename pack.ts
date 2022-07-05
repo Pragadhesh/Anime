@@ -1,0 +1,20 @@
+import * as coda from "@codahq/packs-sdk";
+
+export const pack = coda.newPack();
+
+pack.addFormula({
+  name: "Hello",
+  description: "A Hello World example.",
+  parameters: [
+    coda.makeParameter({
+      type: coda.ParameterType.String,
+      name: "name",
+      description: "The name you would like to say hello to.",
+    }),
+  ],
+
+  resultType: coda.ValueType.String,
+  execute: async function ([name], context) {
+    return "Hello " + name + "!";
+  },
+});
