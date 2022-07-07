@@ -18,9 +18,7 @@
   },
   "homepage": "https://github.com/Pragadhesh/Marvel#readme",
   "dependencies": {
-    "@codahq/packs-sdk": "^1.0.1",
-    "md5": "^2.3.0",
-    "time-stamp": "^2.2.0"
+    "@codahq/packs-sdk": "^1.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
