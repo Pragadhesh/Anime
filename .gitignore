@@ -1,3 +1,5 @@
 node_modules
 .coda.json
 .coda-pack.json
+api-keys.json
+package-lock.json
