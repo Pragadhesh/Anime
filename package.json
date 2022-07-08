@@ -1,7 +1,7 @@
 {
-  "name": "marvel",
+  "name": "Anime",
   "version": "1.0.0",
-  "description": "Pack for marvel",
+  "description": "Pack for Anime",
   "main": "pack.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pragadhesh/Marvel.git"
+    "url": "git+https://github.com/Pragadhesh/Anime.git"
   },
   "author": "Pragadhesh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Pragadhesh/Marvel/issues"
+    "url": "https://github.com/Pragadhesh/Anime/issues"
   },
-  "homepage": "https://github.com/Pragadhesh/Marvel#readme",
+  "homepage": "https://github.com/Pragadhesh/Anime#readme",
   "dependencies": {
     "@codahq/packs-sdk": "^1.0.1"
   },
