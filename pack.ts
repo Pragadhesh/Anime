@@ -58,6 +58,81 @@ const AnimeEpisodesSchema = coda.makeObjectSchema({
   idProperty: "episodeId",
 });
 
+// Schema for Popular Anime
+const PopularAnimeSchema = coda.makeObjectSchema({
+  properties: {
+    animeId: {
+      type: coda.ValueType.String,
+    },
+    animeTitle: {
+      type: coda.ValueType.String,
+    },
+    animeImg: {
+      type: coda.ValueType.String,
+      codaType: coda.ValueHintType.ImageReference
+    },
+    animeUrl: {
+      type: coda.ValueType.String,
+      codaType: coda.ValueHintType.Embed
+    },
+  },
+  displayProperty: "animeId",
+  featuredProperties: ["animeTitle","animeImg","animeUrl"],
+  idProperty: "animeId",
+});
+
+// Schema for Anime Search
+const AnimeSearchSchema = coda.makeObjectSchema({
+  properties: {
+    animeId: {
+      type: coda.ValueType.String,
+    },
+    animeTitle: {
+      type: coda.ValueType.String,
+    },
+    status: {
+      type: coda.ValueType.String,
+    },
+    animeImg: {
+      type: coda.ValueType.String,
+      codaType: coda.ValueHintType.ImageReference
+    },
+    animeUrl: {
+      type: coda.ValueType.String,
+      codaType: coda.ValueHintType.Embed
+    },
+  },
+  displayProperty: "animeId",
+  featuredProperties: ["animeTitle","status","animeImg","animeUrl"],
+  idProperty: "animeId",
+});
+
+// Schema for Anime Movies
+const AnimeMoviesSchema = coda.makeObjectSchema({
+  properties: {
+    animeId: {
+      type: coda.ValueType.String,
+    },
+    animeTitle: {
+      type: coda.ValueType.String,
+    },
+    releasedDate: {
+      type: coda.ValueType.String,
+    },
+    animeImg: {
+      type: coda.ValueType.String,
+      codaType: coda.ValueHintType.ImageReference
+    },
+    animeUrl: {
+      type: coda.ValueType.String,
+      codaType: coda.ValueHintType.Embed
+    },
+  },
+  displayProperty: "animeId",
+  featuredProperties: ["animeTitle","releasedDate","animeImg","animeUrl"],
+  idProperty: "animeId",
+});
+
 // Formula to get the details of the anime
 pack.addFormula({
   name: "Animedetails",
@@ -123,3 +198,79 @@ pack.addSyncTable({
     },
   },
 });
+
+// Sync table to print current the Popular Animes
+pack.addSyncTable({
+  name: "PopularAnimes",
+  identityName: "PopularAnimes",
+  schema: PopularAnimeSchema,
+  formula: {
+    name: "PopularAnime",
+    description: "Returns the current popular animes",
+    parameters: [],
+    execute: async function ([], context) {
+      let finalurl = BASE_URL+"popular"
+      let response = await context.fetcher.fetch({
+        method: "GET",
+        url: finalurl,
+      });
+      const data = response.body
+      return {
+        result: data
+      };
+    },
+  },
+});
+
+// Sync table to Search for Animes
+pack.addSyncTable({
+  name: "Search",
+  identityName: "SearchResults",
+  schema: PopularAnimeSchema,
+  formula: {
+    name: "SearchAnime",
+    description: "Returns anime infomation",
+    parameters: [
+      coda.makeParameter({
+        type: coda.ParameterType.String,
+        name: "name",
+        description: "Search string",
+      }),
+    ],
+    execute: async function ([name], context) {
+      let finalurl = BASE_URL+"search?keyw="+name
+      let response = await context.fetcher.fetch({
+        method: "GET",
+        url: finalurl,
+      });
+      const data = response.body
+      return {
+        result: data
+      };
+    },
+  },
+});
+
+// Sync table to get all the Anime Movies details
+pack.addSyncTable({
+  name: "AnimeMovies",
+  identityName: "AnimeMovies",
+  schema: PopularAnimeSchema,
+  formula: {
+    name: "AnimeMovies",
+    description: "Returns the movies of the animes",
+    parameters: [],
+    execute: async function ([], context) {
+      let finalurl = BASE_URL+"anime-movies"
+      let response = await context.fetcher.fetch({
+        method: "GET",
+        url: finalurl,
+      });
+      const data = response.body
+      return {
+        result: data
+      };
+    },
+  },
+});
+
